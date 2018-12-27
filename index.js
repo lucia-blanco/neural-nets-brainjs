@@ -75,7 +75,7 @@ console.log(net.run({
 })); */
 
 ////////////// MORE THAN NUMBERS //////////////
-const net = new brain.NeuralNetwork({ hiddenLayers: [3] })
+/*const net = new brain.NeuralNetwork({ hiddenLayers: [3] })
 
 const restaurants = {
   "Brilliant Yellow Corral": "Monday",
@@ -103,9 +103,9 @@ const stats = net.train(trainingData);
 console.log(stats);
 
 // this asociates a likelyhood to each restaurant
-/*console.log(net.run({
-  'Wednesday': 1
-}));*/
+// console.log(net.run({
+// 'Wednesday': 1
+// }));
 
 // to get the name of the restaurant:
 function restaurantForDay(dayOfWeek) {
@@ -123,4 +123,18 @@ function restaurantForDay(dayOfWeek) {
   return highestRestaurantName;
 }
 
-console.log(restaurantForDay('Monday'));
+console.log(restaurantForDay('Monday'));*/
+
+/////////// COUNTING TO 5 ////////////////
+const trainingData = [
+  [1,2,3,4,5],
+  [5,4,3,2,1]
+];
+
+const net = new brain.recurrent.LSTMTimeStep();
+
+net.train(trainingData);
+
+console.log(Math.round(net.run([1,2,3,4])));
+console.log(Math.round(net.run([5,4,3])));
+
