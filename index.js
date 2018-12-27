@@ -103,19 +103,20 @@ const stats = net.train(trainingData);
 console.log(stats);
 
 // this asociates a likelyhood to each restaurant
-console.log(net.run({
-  'Monday': 1
-}));
+/*console.log(net.run({
+  'Wednesday': 1
+}));*/
 
 // to get the name of the restaurant:
 function restaurantForDay(dayOfWeek) {
   const result = net.run({ [dayOfWeek]: 1 });
+  console.log(result);
   let highestValue = 0;
   let highestRestaurantName = '';
 
   for( let restaurantName in result) {
     if (result[restaurantName] > highestValue) {
-      highestValue = result[restaurantForDay];
+      highestValue = result[restaurantName];
       highestRestaurantName = restaurantName;
     }
   }
