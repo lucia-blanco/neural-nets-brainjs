@@ -240,7 +240,7 @@ console.log(net.run('4+2='));
 console.log(net.run('2+5='));*/
 
 ///////////// NUMBER DETECTOR ///////////////
-function toArray(string) {
+/*function toArray(string) {
   if (string.length !== 7 * 7) {
     throw new Error('string in wrong size');
   }
@@ -358,16 +358,6 @@ const trainingData = [
 
 net.train(trainingData);
 
-/*const result = net.run(toArray(
-  '#######' +
-  '#     #' +
-  '#     #' +
-   '###### ' +
-  '      #' +
-  '      #' +
-  '      #'
-));*/
-
 const result = brain.likely(toArray(  
   '#######' +
   '#     #' +
@@ -377,4 +367,31 @@ const result = brain.likely(toArray(
   '   #   ' +
   ' #     '), net);
 
-console.log(result);
+console.log(result);*/
+
+///////////// RECOMMENDATION ENGINE ////////////
+const trainingData = [
+  { input: { blue: 1 }, output: [1] },
+  { input: { red: 1 }, output: [1] },
+  { input: { black: 1 }, output: [0] },
+  { input: { green: 1 }, output: [0] },
+  { input: { brown: 1 }, output: [0] },
+];
+
+const net = new brain.NeuralNetwork();
+
+net.train(trainingData);
+console.log('before: ');
+console.log(Array.from(net.run({ blue: 1 })));
+console.log(Array.from(net.run({ brown: 1 })));
+
+trainingData.pop();
+// pushing without popping makes the net remember that the user didn't like brown in the first place
+trainingData.push(
+    { input: { brown: 1 }, output: [1] }
+);
+
+net.train(trainingData);
+console.log('after: ');
+console.log(Array.from(net.run({ blue: 1 })));
+console.log(Array.from(net.run({ brown: 1 })));
